@@ -27,9 +27,7 @@ function Moviecard(props) {
                     <button
                         onClick={() => WatchlistService.toggleWatchlist(props.movie.id)}
                         className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold transition-all transform translate-y-2 group-hover:translate-y-0"
-                    >
-                        
-                        {WatchlistService && WatchlistService.isInWatchlist(props.movie.id) ? 'Remove Watchlist' : '+ Watchlist'}
+                    >{WatchlistService && WatchlistService.isInWatchlist(props.movie.id) ? 'Remove Watchlist' : '+ Watchlist'}
                     </button>
                 </div>
 

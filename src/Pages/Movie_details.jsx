@@ -4,6 +4,7 @@ import { MovieService } from '../js/movies';
 import { ProfileService } from '../js/profile';
 import { AppModule } from '../js/app';
 import { WatchlistService } from '../js/watchlist';
+import Moviecard from '../Components/Moviecard';
 
 function Movie_details() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -58,8 +59,8 @@ function Movie_details() {
 
                             <h1 className="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight">{movie.title}</h1>
 
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                ${movie.genre.map(g => (<span class="bg-slate-800 text-slate-200 text-xs font-semibold px-3 py-1 rounded-lg border border-slate-700">{g}</span>))}
+                            <div className="flex flex-wrap gap-2 mb-6">
+                                ${movie.genre.map(g => (<span className="bg-slate-800 text-slate-200 text-xs font-semibold px-3 py-1 rounded-lg border border-slate-700">{g}</span>))}
                             </div>
 
                             <p className="text-slate-300 text-base leading-relaxed mb-8 max-w-3xl">
@@ -69,7 +70,7 @@ function Movie_details() {
 
                             <div className="flex flex-wrap items-center gap-4">
                                 <button
-                                    onClick={AppModule.openTrailerModal('{movie.trailerUrl}', '{movie.title}')}
+                                    onClick={AppModule.openTrailerModal(movie.trailerUrl, movie.title)}
                                     className="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-sm shadow-xl flex items-center gap-2 transition-all hover:scale-105"
                                 >
                                     <span>▶</span>
@@ -77,7 +78,7 @@ function Movie_details() {
                                 </button>
 
                                 <button
-                                    onClick={WatchlistService.toggleWatchlist(movie.id)}
+                                    onClick={() => WatchlistService.toggleWatchlist(movie.id)}
                                     className={`px-6 py-3.5 ${WatchlistService.isInWatchlist ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-slate-800 hover:bg-slate-700'} text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2`}
                                 >
                                     {WatchlistService.isInWatchlist ? <>
@@ -135,16 +136,17 @@ function Movie_details() {
                 </div>
 
 
-                {/* <div className="mb-8">
+                <div className="mb-8">
                     <h3 className="text-xl font-bold text-white mb-4">More Movies You Might Like</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4">
                         {(MovieService ? MovieService.getAllMovies() : [])
                             .filter(m => m.id !== movie.id && m.genre.some(g => movie.genre.includes(g)))
                             .slice(0, 5)
-                            .map(m => createMovieCardHTML(m))
-                            .join("")}
+                            .map(m => <Moviecard
+                                key={movie.id}
+                                movie={m} />)}
                     </div>
-                </div> */}
+                </div>
             </main>
         </>
     )

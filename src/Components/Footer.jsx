@@ -38,10 +38,10 @@ function Footer() {
         <div>
           <h4 className="font-semibold text-slate-200 text-xs uppercase tracking-wider mb-3">Connect</h4>
           <div className="flex items-center gap-2 text-slate-400 mb-3 text-xs">
-            <Link to="https://github.com" target="_blank" className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg hover:text-white hover:border-slate-700 transition-colors font-medium">
+            <Link to="https://github.com/" target="_blank" className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg hover:text-white hover:border-slate-700 transition-colors font-medium">
               GitHub
             </Link>
-            <Link to="https://twitter.com" target="_blank" className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg hover:text-white hover:border-slate-700 transition-colors font-medium">
+            <Link to="https://twitter.com/" target="_blank" className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg hover:text-white hover:border-slate-700 transition-colors font-medium">
               Twitter
             </Link>
           </div>

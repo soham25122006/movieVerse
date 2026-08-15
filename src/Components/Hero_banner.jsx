@@ -1,18 +1,46 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import { Link } from 'react-router-dom';
 import { MovieService } from '../js/movies';
 import { WatchlistService } from '../js/watchlist';
 import { AppModule } from '../js/app';
-let currentHeroIndex = 0;
 
-function Hero_banner(props) {
+
+
+function Hero_banner() {
+    const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
     const movies = MovieService ? MovieService.getMoviesByCategory("trending") : [];
     if (movies.length === 0) return;
-
-    currentHeroIndex = (props.index + movies.length) % movies.length;
+    
     const movie = movies[currentHeroIndex];
-
+    
     const isInWatchlist = WatchlistService ? WatchlistService.isInWatchlist(movie.id) : false;
+    function prevHeroMovie() {
+        setCurrentHeroIndex(
+            (currentHeroIndex - 1 + movies.length) % movies.length
+        );
+    }
+    
+    function nextHeroMovie() {
+        setCurrentHeroIndex(
+            (currentHeroIndex + 1) % movies.length
+        );
+    }
+
+    useEffect(() => {
+
+        const interval = setInterval(() => {
+
+            setCurrentHeroIndex(prevIndex =>
+                (prevIndex + 1) % movies.length
+            );
+
+        }, 5000);
+
+        return () => {
+            clearInterval(interval);
+        };
+
+    }, []);
 
     return (
         <div className="relative w-full min-h-[520px] md:min-h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-slate-800/80 group">
@@ -87,7 +115,7 @@ function Hero_banner(props) {
 
                 <div className="flex flex-wrap items-center gap-3">
                     <button
-                        onClick={()=> AppModule.openTrailerModal(movie.trailerUrl, movie.title)}
+                        onClick={() => AppModule.openTrailerModal(movie.trailerUrl, movie.title)}
                         className="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-sm shadow-xl hover:shadow-red-900/40 transition-all flex items-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
                     >
                         <span>▶</span>
