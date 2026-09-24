@@ -1,5 +1,3 @@
-import React from 'react'
-
 function About() {
     return (
         <div className="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-red-600 selection:text-white">

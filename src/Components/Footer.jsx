@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <footer className="bg-slate-950 border-t border-slate-900 py-12 text-slate-400 text-sm">
